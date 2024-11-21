@@ -1,0 +1,48 @@
+[package]
+name = "rust_rp2040"
+authors = ["The rp-rs Developers"]
+categories = ["embedded", "hardware-support", "no-std", "no-std::no-alloc"]
+description = "Examples for the rp2040-hal crate"
+edition = "2021"
+
+[[bin]]
+
+name = "rust_rp2040"
+test = false
+bench = false
+
+
+[dependencies]
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7"
+cortex-m-rtic = "1.1.4"
+critical-section = {version = "1.2.0"}
+defmt = "0.3.8"
+defmt-rtt = "0.4.1"
+dht-sensor = "0.2.1"
+embedded-alloc = "0.6.0"
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
+embedded-hal-bus = {version = "0.2.0", features = ["defmt-03"]}
+embedded-io = "0.6.1"
+embedded_hal_0_2 = {package = "embedded-hal", version = "0.2.5", features = ["unproven"]}
+fugit = "0.3.7"
+futures = {version = "0.3.31", default-features = false, features = ["async-await"]}
+hd44780-driver = "0.4.0"
+nb = "1.1.0"
+panic-halt = "0.2.0"
+panic-probe = {version = "0.3.2", features = ["print-defmt"]}
+pio = "0.2.1"
+pio-proc = "0.2.0"
+# We aren't using this, but embedded-hal-bus 0.2 unconditionally requires atomics.
+# Should be fixed in e-h-b 0.3 via https://github.com/rust-embedded/embedded-hal/pull/607
+portable-atomic = {version = "1.7.0", features = ["critical-section"]}
+rp2040-boot2 = "0.3.0"
+rp2040-hal = {version = "0.10.0", features = ["critical-section-impl", "rt", "defmt"]}
+static_cell = "2.1.0"
+
+[target.'cfg( target_arch = "arm" )'.dependencies]
+embassy-executor = {version = "0.5", features = ["arch-cortex-m", "executor-thread"]}
+
+[lints.clippy]
+too_long_first_doc_paragraph = "allow"
